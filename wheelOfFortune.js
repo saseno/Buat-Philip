@@ -30,7 +30,7 @@ var viewWidth = 768,
 	timeStep = (1/60),
 	time = 0;
 
-var ppm = 24, // pixels per meter
+var ppm = 32, // pixels per meter
 	physicsWidth = viewWidth / ppm,
 	physicsHeight = viewHeight / ppm,
 	physicsCenterX = physicsWidth * 0.5,
@@ -143,8 +143,8 @@ function initPhysics() {
 	var wheelRadius = 8,
 		wheelX = physicsCenterX,
 		wheelY = wheelRadius + 4,
-		arrowX = wheelX,
-		arrowY = wheelY + wheelRadius + 0.625;
+		arrowX = wheelX + wheelRadius + 0.625,
+		arrowY = wheelY;
 
 	wheel = new Wheel(wheelX, wheelY, wheelRadius, nSegements, 0.25, 7.5);
 	wheel.body.angle = (Math.PI / 32.5);
@@ -465,10 +465,10 @@ Arrow.prototype = {
 	},
 
 	createArrowShape:function() {
-		this.verts[0] = [0, this.h * 0.25];
-		this.verts[1] = [-this.w * 0.5, 0];
-		this.verts[2] = [0, -this.h * 0.75];
-		this.verts[3] = [this.w * 0.5, 0];
+		this.verts[0] = [0, -this.h * 0.25];
+		this.verts[1] = [-this.w * 2.7, 0];
+		this.verts[2] = [0, -this.h * 0.25];
+		this.verts[3] = [this.w * 0.7, 0];
 
 		this.pVerts[0] = [this.verts[0][0] * ppm, -this.verts[0][1] * ppm];
 		this.pVerts[1] = [this.verts[1][0] * ppm, -this.verts[1][1] * ppm];
@@ -480,14 +480,17 @@ Arrow.prototype = {
 
 		return shape;
 	},
+	
 	hasStopped:function() {
 		var angle = Math.abs(this.body.angle % TWO_PI);
 
 		return (angle < 1e-3 || (TWO_PI - angle) < 1e-3);
 	},
+	
 	update:function() {
 
 	},
+	
 	draw:function() {
 		ctx.save();
 		ctx.translate(this.pX, this.pY);
@@ -496,7 +499,7 @@ Arrow.prototype = {
 		ctx.fillStyle = pinsColor;
 
 		ctx.beginPath();
-		ctx.moveTo(this.pVerts[0][0], this.pVerts[0][1]);
+		ctx.moveTo(-this.pVerts[0][0], -this.pVerts[0][1]);
 		ctx.lineTo(this.pVerts[1][0], this.pVerts[1][1]);
 		ctx.lineTo(this.pVerts[2][0], this.pVerts[2][1]);
 		ctx.lineTo(this.pVerts[3][0], this.pVerts[3][1]);
