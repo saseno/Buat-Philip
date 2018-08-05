@@ -10,7 +10,7 @@ pinsColor = "#030303";
 stoperColor = "#0a0a0a";
 
 availableColors = [ '#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA' ];
-availableTexts 	= [ 'merah', 'green', 'Text03', 'Text04' ];
+availableTexts 	= [ 'merah', 'green', 'Text123456', 'Text04' ];
 useRandomColors = true;
 
 actualSegements = [];
@@ -268,17 +268,14 @@ function loop() {
 function drawText(i, deg, text) {
 	
 	ctx.save();
-	ctx.translate(0, 0);
-	
-	part_ = 360/nSegements;
-	
-	deg = deg - (2 * part_/5);
-	
+	ctx.translate(0, 0);	
+	part_ = 360/nSegements;	
+	deg = deg - (2 * part_/5);	
 	ctx.rotate(deg2rad(deg, i));
-	
+	ctx.textAlign="end"; 
 	ctx.fillStyle = "#000";
 	ctx.font = "27px Arial";
-	ctx.fillText(text, 80, 0);
+	ctx.fillText(text, 230, 0);
 	ctx.restore();	
 }
 
@@ -363,8 +360,8 @@ Wheel.prototype = {
 			posVal *= -1;
 		}
 		
-		console.log('currentRotation: '  + (wheel.body.angle * Math.PI / 180) )
-		console.log('currentSegment: '  + Math.floor(posVal))
+		//console.log('currentRotation: '  + (wheel.body.angle * Math.PI / 180) )
+		//console.log('currentSegment: '  + Math.floor(posVal))
 		
 		return (currentSegment);
 	},
@@ -395,7 +392,7 @@ Wheel.prototype = {
 		}
 		
 		for (var i = 0; i < this.segments; i++) {		
-			drawText(i, deg_ + sliceDeg, actualSegements[i] + " - " + i);
+			drawText(i, deg_ + sliceDeg, actualSegements[i]);
 			deg_ += sliceDeg;	
 		}
 				
