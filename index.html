@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title></title>
+		<style>
+		body {
+			background-color: #fff;
+			margin: 0;
+		}
+
+		.centered {
+			position: absolute;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		#container {
+			width: 768px;
+			height: 768px;
+		}
+
+		#status_label {
+			position: absolute;
+			top: 768px;
+			width: 768px;
+			color: black;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 1.5em;
+			text-align: center;
+			pointer-events: none;
+		}
+
+		#drawing_canvas {
+			position: absolute;
+		}
+		</style>
+	
+	</head>
+	<body>
+		
+		<div id="container" class="centered">
+			<canvas id="drawing_canvas"></canvas>
+			<div id="status_label">loading...</div>
+		</div>
+		
+		<script src="p2.min.js"></script>
+		<script src="wheelOfFortune.js"></script>
+	</body>
+</html>
