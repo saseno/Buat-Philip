@@ -82,10 +82,10 @@ function initDrawingCanvas() {
 	drawingCanvas.height = viewHeight;
 	ctx = drawingCanvas.getContext('2d');
 
-	drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition);
-	drawingCanvas.addEventListener('mousedown', checkStartDrag);
-	drawingCanvas.addEventListener('mouseup', checkEndDrag);
-	drawingCanvas.addEventListener('mouseout', checkEndDrag);
+	drawingCanvas.addEventListener('mousemove', updateMouseBodyPosition, true);
+	drawingCanvas.addEventListener('mousedown', checkStartDrag, true);
+	drawingCanvas.addEventListener('mouseup', checkEndDrag, true);
+	drawingCanvas.addEventListener('mouseout', checkEndDrag, true);
 }
 
 function updateMouseBodyPosition(e) {
