@@ -32,8 +32,8 @@ const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI * 0.5;
 
 // canvas settings
-var viewWidth = 768,
-	viewHeight = 768,
+var viewWidth = 800,
+	viewHeight = 800,
 	viewCenterX = viewWidth * 0.5,
 	viewCenterY = viewHeight * 0.5,
 	drawingCanvas = document.getElementById("drawing_canvas"),
@@ -41,7 +41,7 @@ var viewWidth = 768,
 	timeStep = (1/60),
 	time = 0;
 
-var ppm = 32, // pixels per meter
+var ppm = 38, // pixels per meter
 	physicsWidth = viewWidth / ppm,
 	physicsHeight = viewHeight / ppm,
 	physicsCenterX = physicsWidth * 0.5,
