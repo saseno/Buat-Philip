@@ -3,15 +3,26 @@
 // variables
 /////////////////////////////
 welcomeMessage = 'Putar untuk memulai...';
-nSegements = 14;
+nSegements = 16;
 
 frameColor = '#aeaeae';
 pinsColor = "#030303";
-stoperColor = "#0a0a0a";
+stoperColor = "#fa0a0a";
 
-availableColors = [ '#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA' ];
-availableTexts 	= [ 'merah', 'green', 'Text123456', 'Text04' ];
-useRandomColors = true;
+availableColors = [ 
+	'#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA',
+	'#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA',
+	'#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA',
+	'#ff5555', '#55ff55', '#FFAAEE', '#FFEEAA' 
+	]; //not used
+availableTexts 	= [ 
+	'1 Voucher GRAB 10K', 'ZONK!', '1 Voucher NANNY PAVILILION 100K', 
+	'1 Voucher GRAB 10K', 'ZONK!', '1 Voucher MAP 100K', 
+	'1 Voucher GRAB 10K', '1 UNIT JBL SPEAKER', 'ZONK!', 
+	'1 Voucher NANNY PAVILILION 100K', '1 Voucher GRAB 10K', 'PUTAR LAGI!', 
+	'1 UNIT HEADSET SONY', 'ZONK!', '1 Voucher NANNY PAVILILION 100K', '1 Voucher MAP 100K'
+	];
+useRandomColors = false;
 
 actualSegements = [];
 
@@ -52,6 +63,8 @@ var wheelSpinning = false,
 
 var particles = [];
 var statusLabel = document.getElementById('status_label');
+
+var img = document.getElementById("wheelImg");
 
 function deg2rad(deg, i) { return (deg * Math.PI/(180)); }
 
@@ -135,8 +148,8 @@ function initPhysics() {
 	arrowMaterial = new p2.Material();
 	pinMaterial = new p2.Material();
 	contactMaterial = new p2.ContactMaterial(arrowMaterial, pinMaterial, {
-		friction:0.9,
-		restitution:0.1
+		friction:0.7,
+		restitution:0.2
 	});
 	world.addContactMaterial(contactMaterial);
 
@@ -275,7 +288,7 @@ function drawText(i, deg, text) {
 	ctx.textAlign="end"; 
 	ctx.fillStyle = "#000";
 	ctx.font = "27px Arial";
-	ctx.fillText(text, 230, 0);
+	ctx.fillText(text, 330, 0);
 	ctx.restore();	
 }
 
@@ -305,6 +318,7 @@ function Wheel(x, y, radius, segments, pinRadius, pinDistance) {
 		
 	for (var i = 0; i < this.segments; i++) {
 		//console.log('.....')
+		
 		if (useRandomColors) {
 			do {
 				tempI = Math.floor((Math.random() * 100) + 1)
@@ -378,24 +392,34 @@ Wheel.prototype = {
 		ctx.fillRect(-12, 0, 24, 400);
 		ctx.font = "30px Arial";
 		ctx.rotate(-this.body.angle);
-
+			
 		var sliceDeg = 360/this.segments;
 		var deg_ = 0;
 		
+		//console.log(this.pRadius)
+				
+		/*
 		for (var i = 0; i < this.segments; i++) {			
 			ctx.fillStyle = this.usedColors[i];						
 			ctx.beginPath();
 			ctx.arc(0, 0, this.pRadius, i * this.deltaPI, (i + 1) * this.deltaPI);
 			ctx.lineTo(0, 0);
 			ctx.closePath();
-			ctx.fill();		
+
+			ctx.fill();			
+			
 		}
+		*/
 		
+		var position_ = -1*(this.pRadius*1.0)
+		
+		ctx.drawImage(img, position_, position_, (2*this.pRadius), (2*this.pRadius) );	
+		/*
 		for (var i = 0; i < this.segments; i++) {		
 			drawText(i, deg_ + sliceDeg, actualSegements[i]);
 			deg_ += sliceDeg;	
 		}
-				
+		*/
 		ctx.fillStyle = stoperColor;
 
 		this.pPinPositions.forEach(function(p, i) {
@@ -405,6 +429,7 @@ Wheel.prototype = {
 		}, this);
 
 		ctx.restore();
+		
 	}
 };
 
